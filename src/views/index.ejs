@@ -1,0 +1,57 @@
+<%- include('partials/header') %>
+
+    <div class="px-8 md:px-12 py-12 max-w-[1920px] mx-auto min-h-[70vh]">
+        <!-- Hero Header -->
+        <div class="mb-16">
+            <h1 class="text-5xl md:text-7xl font-extrabold text-teal-950 headline tracking-tighter mb-4">The Collection
+            </h1>
+            <p class="text-zinc-500 text-lg max-w-2xl">Discover our curated list of rare indoor specimens, each selected
+                for their architectural beauty and historical significance.</p>
+        </div>
+
+        <% if (trees.length> 0) { %>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                <% trees.forEach(tree=> { %>
+                    <a href="/details/<%= tree._id %>"
+                        class="group relative bg-white rounded-[40px] p-6 shadow-sm hover:shadow-xl transition-all duration-500 border border-zinc-100 flex flex-col h-full active:scale-[0.98]">
+                        <div class="overflow-hidden rounded-[30px] aspect-[4/5] bg-zinc-50 mb-6">
+                            <img src="<%= tree.image %>" alt="<%= tree.treename %>"
+                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        </div>
+                        <div>
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-2xl font-bold text-teal-950 headline tracking-tight">
+                                    <%= tree.treename %>
+                                </h3>
+                                <button
+                                    class="material-symbols-outlined text-zinc-300 hover:text-teal-600 transition-colors">favorite</button>
+                            </div>
+                            <p class="text-zinc-500 text-sm leading-relaxed line-clamp-2">
+                                <%= tree.description %>
+                            </p>
+                        </div>
+                        <div class="mt-auto pt-6 flex justify-between items-center">
+                            <span
+                                class="text-sm font-bold text-teal-800 uppercase tracking-widest headline">View Details</span>
+                            <div class="bg-teal-50 p-2 rounded-full text-teal-700">
+                                <span class="material-symbols-outlined text-sm">arrow_outward</span>
+                            </div>
+                        </div>
+                    </a>
+                    <% }); %>
+            </div>
+            <% } else { %>
+                <div
+                    class="flex flex-col items-center justify-center py-20 bg-zinc-50 rounded-[40px] border-2 border-dashed border-zinc-200">
+                    <span class="material-symbols-outlined text-6xl text-zinc-300 mb-4">potted_plant</span>
+                    <h3 class="text-2xl font-bold text-zinc-400 headline">No specimens found</h3>
+                    <p class="text-zinc-400 mb-8">Start your atelier collection by adding a new specimen.</p>
+                    <a href="/add"
+                        class="px-8 py-3 bg-teal-800 text-white rounded-full font-bold shadow-lg shadow-teal-900/20 hover:bg-teal-700 transition-all">
+                        Add New Tree
+                    </a>
+                </div>
+                <% } %>
+    </div>
+
+    <%- include('partials/footer') %>
